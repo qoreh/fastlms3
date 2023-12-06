@@ -21,7 +21,15 @@ spring:
         smtp:
           starttls:
             enable: true
-            
+
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
 logging:
   level:
     root: info

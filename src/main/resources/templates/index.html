@@ -3,14 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>메인 페이지</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <style>
+        .container {
+            width: 800px;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 800px;
+            height: auto;
+        }
+
+        .slick-prev:before, .slick-next:before{
+            color: #7d7d7d;
+            font-size: 30px;
+            opacity: 0.5;
+
+        }
+        .slick-prev {
+            left: 30px;
+            z-index: 1;
+        }
+        .slick-next{
+
+            right: 40px;
+            z-index: 1;
+        }
+        .slick-dots li button:before {
+            font-size: 10px;
+            line-height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            content: '•';
+            text-align: center;
+            opacity: .25;
+            color: black;
+        }
+
+
+    </style>
 </head>
 <body>
-    <h1>메인 페이지 </h1>
-    <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+<h1>메인 페이지 </h1>
+<div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
 
-    <div>
-        <img src="/files/2021/09/05/6e5170576b0c4c29879e5334dfccab2d.png"/>
+<div class="container">
+    <div class="slide_wrap">
+        <div class="slide_div">
+            <div th:each="x: ${list}">
+                <a>
+                    <img th:src="@{${x.urlFilename}}">
+                </a>
+            </div>
+        </div>
     </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".slide_div").slick(
+            {
+                dots: true
+            }
+        );
+    });
+</script>
 
 </body>
 </html>

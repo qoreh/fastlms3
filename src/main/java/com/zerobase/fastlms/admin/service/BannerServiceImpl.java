@@ -44,6 +44,7 @@ public class BannerServiceImpl implements BannerService {
         Banner banner = optionalBanner.get();
 
         banner.setBannerName(parameter.getBannerName());
+        banner.setAlterText(parameter.getBannerName() + " 배너의 대체 텍스트 입니다.");
         banner.setLinkPath(parameter.getLinkPath());
         banner.setOpenOption(parameter.getOpenOption());
         banner.setRangeNumber(parameter.getRangeNumber());
@@ -60,6 +61,7 @@ public class BannerServiceImpl implements BannerService {
     public boolean add(BannerInput parameter) {
         Banner banner = Banner.builder()
                 .bannerName(parameter.getBannerName())
+                .alterText(parameter.getBannerName() + " 배너의 대체 텍스트 입니다.")
                 .linkPath(parameter.getLinkPath())
                 .openOption(parameter.getOpenOption())
                 .rangeNumber(parameter.getRangeNumber())
@@ -76,6 +78,35 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public BannerDto getById(long id) {
         return bannerRepository.findById(id).map(BannerDto::of).orElse(null);
+    }
+
+    @Override
+    public boolean del(String idList) {
+        if (idList != null && idList.length() > 0) {
+            String[] ids = idList.split(",");
+            for (String x : ids) {
+                long id = 0L;
+                try {
+                    id = Long.parseLong(x);
+                } catch (Exception e) {
+                }
+
+                if (id > 0) {
+                    bannerRepository.deleteById(id);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public List<BannerDto> publicList(BannerParam parameter) {
+        List<Banner> banners = bannerRepository.findAllByIsPublicTrueOrderByRangeNumber();
+        if (CollectionUtils.isEmpty(banners)) {
+            return null;
+        }
+        return BannerDto.of(banners);
     }
 
 }

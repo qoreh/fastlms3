@@ -29,9 +29,23 @@ public interface BannerService {
     public boolean add(BannerInput parameter);
 
     /**
-     * 강좌 상세정보
+     * 상세정보
      * @param id
      * @return
      */
     public BannerDto getById(long id);
+
+    /**
+     * 삭제
+     * @param idList
+     * @return
+     */
+    boolean del(String idList);
+
+    /**
+     * 메인 공개 리스트
+     * @param parameter
+     * @return
+     */
+    List<BannerDto> publicList(BannerParam parameter);
 }

@@ -22,6 +22,7 @@ public class Banner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bannerName;
+    private String alterText;
     private String linkPath;
     private String openOption;
     private Long rangeNumber;

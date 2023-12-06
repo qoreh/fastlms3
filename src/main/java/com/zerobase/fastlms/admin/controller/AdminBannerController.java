@@ -7,6 +7,7 @@ import com.zerobase.fastlms.admin.service.BannerService;
 import com.zerobase.fastlms.admin.type.OpenOption;
 import com.zerobase.fastlms.course.controller.BaseController;
 import com.zerobase.fastlms.course.dto.CourseDto;
+import com.zerobase.fastlms.course.model.CourseInput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -173,5 +174,13 @@ public class AdminBannerController extends BaseController {
         return "redirect:/admin/banner/list.do";
     }
 
+    @PostMapping("/admin/banner/delete.do")
+    public String del(Model model, HttpServletRequest request
+            , BannerInput parameter) {
+
+        boolean result = bannerService.del(parameter.getIdList());
+
+        return "redirect:/admin/banner/list.do";
+    }
 
 }

@@ -42,3 +42,4 @@ build/
 /mvnw
 /mvnw.cmd
 /files/
+/src/main/resources/static/files
